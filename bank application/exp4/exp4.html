@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Application Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("bankimg1.avif");
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            background-size: 100% 100%;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 12px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: #3996ec;
+            color: #fff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .error-message {
+            color: #ff0000;
+            margin-bottom: 10px;
+        }
+
+        .success-message {
+            color: #4CAF50;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<form id="bankApplicationForm">
+    <h1>Bank Application Form</h1>
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="firstName" required>
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="lastName" required>
+
+    <label for="accountNumber">Account Number:</label>
+    <input type="text" id="accountNumber" name="accountNumber" required>
+
+    <label for="balance">Balance:</label>
+    <input type="text" id="balance" name="balance" required>
+
+    <label for="pin">PIN:</label>
+    <input type="password" id="pin" name="pin" required>
+
+    <label for="confirmPin">Confirm PIN:</label>
+    <input type="password" id="confirmPin" name="confirmPin" required>
+
+    <div class="error-message" id="error-message"></div>
+    <div class="success-message" id="success-message"></div>
+
+    <button type="button" onclick="validateForm()">Submit</button>
+</form>
+
+<script>
+function validateForm() {
+    var firstName = document.getElementById("firstName").value;
+    var lastName = document.getElementById("lastName").value;
+    var accountNumber = document.getElementById("accountNumber").value;
+    var balance = document.getElementById("balance").value;
+    var pin = document.getElementById("pin").value;
+    var confirmPin = document.getElementById("confirmPin").value;
+
+    var errorMessage = document.getElementById("error-message");
+    var successMessage = document.getElementById("success-message");
+
+    errorMessage.innerHTML = "";
+    successMessage.innerHTML = "";
+
+    if (firstName === "" || lastName === "" || accountNumber === "" || balance === "" || pin === "" || confirmPin === "") {
+        errorMessage.innerHTML = "All fields are required.";
+    } else if (isNaN(accountNumber) || isNaN(balance) || isNaN(pin) || isNaN(confirmPin)) {
+        errorMessage.innerHTML = "Account Number, Balance, PIN, and Confirm PIN must be numeric.";
+    } else if (accountNumber.length > 16) {
+        errorMessage.innerHTML = "Account Number must be before 16.";
+    } else if (pin.length !== 4 || confirmPin.length !== 4) {
+        errorMessage.innerHTML = "PIN and Confirm PIN must be 4 digits.";
+    } else if (pin !== confirmPin) {
+        errorMessage.innerHTML = "PIN and Confirm PIN do not match.";
+    } else {
+        successMessage.innerHTML = "Bank application submitted successfully!";
+        var queryString = "firstName=" + encodeURIComponent(firstName) +
+            "&lastName=" + encodeURIComponent(lastName) +
+            "&accountNumber=" + encodeURIComponent(accountNumber) +
+            "&balance=" + encodeURIComponent(balance) +
+            "&pin=" + encodeURIComponent(pin) +
+            "&confirmPin=" + encodeURIComponent(confirmPin);
+        window.location.href = "success.php?" + queryString;
+    }
+}
+</script>
+
+</body>
+</html>

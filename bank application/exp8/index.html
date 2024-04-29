@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Application</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Bank Application</h1>
+        <div id="accountInfo">
+            <h2>Account Information</h2>
+            <p id="balance">Balance: ₹0</p>
+        </div>
+        <div id="transactionForm">
+            <h2>Transactions</h2>
+            <input type="number" id="amount" placeholder="Enter amount">
+            <div class="buttons">
+                <button onclick="deposit()">Deposit</button>
+                <button onclick="withdraw()">Withdraw</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

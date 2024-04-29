@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="bankApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Bank Application Form</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+
+    <script>
+        var app = angular.module('bankApp', []);
+
+        app.controller('FormController', ['$scope', function($scope) {
+            $scope.application = {};
+            $scope.formSubmitted = false;
+
+            $scope.submitForm = function(applicationForm) {
+                if (applicationForm && applicationForm.$valid) { 
+                    $scope.formSubmitted = true; 
+                } else {
+                    console.error("Form is undefined or invalid");
+                }
+            };
+        }]);
+    </script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #3d3df3;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #5d3fef;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #4CAF50; 
+            color: white;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049; 
+        }
+
+        .success-message {
+            text-align: center;
+            color: #28a745; 
+        }
+
+        .success-message h2 {
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" ng-controller="FormController">
+        <h1>Bank Application Form</h1>
+        
+        <form name="applicationForm" ng-submit="submitForm(applicationForm)" ng-if="!formSubmitted">
+            <label for="firstName">First Name:</label>
+            <input type="text" id="firstName" ng-model="application.firstName" required>
+
+            <label for="lastName">Last Name:</label>
+            <input type="text" id="lastName" ng-model="application.lastName" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" ng-model="application.email" required>
+
+            <label for="phone">Phone:</label>
+            <input type="tel" id="phone" ng-model="application.phone" required>
+
+            <label for="accountType">Account Type:</label>
+            <select id="accountType" ng-model="application.accountType" required>
+                <option value="savings">Savings</option>
+                <option value="checking">Checking</option>
+                <option value="business">Business</option>
+            </select>
+            <button type="submit">Submit Application</button>
+        </form>
+        <div class="success-message" ng-if="formSubmitted">
+            <h2>Successfully Submitted!</h2>
+            <p>Thank you for submitting your application.</p>
+        </div>
+    </div>
+</body>
+</html>

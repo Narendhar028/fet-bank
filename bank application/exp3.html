@@ -1,0 +1,116 @@
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bank Application</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-image: url("imgex3.avif");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+      background-color: #f4f4f4;
+    }
+
+    header {
+      background-color: rgba(0, 0, 0, 0.5);
+      color: white;
+      padding: 10px;
+      text-align: center;
+    }
+
+    section {
+      margin: 20px;
+      padding: 20px;
+      background-color: rgba(255, 255, 255, 0.5);
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    button {
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+      margin: 5px;
+    }
+
+    #balance {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    input, button {
+      margin: 5px;
+    }
+
+    #transactionResult {
+      margin-top: 10px;
+      font-weight: bold;
+    }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      let balance = 10000;
+
+      function updateBalance() {
+        $('#balance').text('₹' + balance);
+      }
+
+      $('#depositBtn').click(function() {
+        const amount = prompt('Enter deposit amount:');
+        if (amount && !isNaN(amount)) {
+          balance += parseFloat(amount);
+          updateBalance();
+          showTransactionResult(`Deposited ₹${amount}`);
+        } else {
+          alert('Invalid amount');
+        }
+      });
+
+      $('#withdrawBtn').click(function() {
+        const amount = prompt('Enter withdrawal amount:');
+        if (amount && !isNaN(amount)) {
+          if (balance >= parseFloat(amount)) {
+            balance -= parseFloat(amount);
+            updateBalance();
+            showTransactionResult(`Withdrawn ₹${amount}`);
+          } else {
+            alert('Insufficient funds');
+          }
+        } else {
+          alert('Invalid amount');
+        }
+      });
+
+    });
+  </script>
+</head>
+<body>
+
+  <header>
+    <h1>Bank Application</h1>
+  </header>
+
+  <section>
+    <h2>Your Balance</h2>
+    <p id="balance">₹10000</p>
+    <button id="depositBtn">Deposit</button>
+    <button id="withdrawBtn">Withdraw</button>
+  </section>
+
+</body>
+</html>
